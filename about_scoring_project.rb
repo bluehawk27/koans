@@ -24,13 +24,22 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 # score([2,3,4,6,2]) => 0 points
 # score([3,4,5,3,3]) => 350 points
 # score([1,5,1,2,4]) => 250 points
-#
+# sum = 0
 # More scoring examples are given in the tests below:
 #
 # Your goal is to write the score method.
 
 def score(dice)
-  # You need to write this method
+   sum = 0
+    (1..6).each do |i|
+        idice = dice.select { |d| d == i }
+        if idice.size >= 3
+            sum += (i==1 ? 1000 : i*100)
+        end
+        sum += (idice.size % 3) * 100   if i == 1
+        sum += (idice.size % 3) *  50   if i == 5
+    end
+    sum
 end
 
 class AboutScoringProject < Neo::Koan
